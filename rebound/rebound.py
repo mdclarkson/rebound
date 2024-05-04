@@ -13,9 +13,9 @@ from queue import Queue
 from subprocess import PIPE, Popen
 from threading import Thread
 import webbrowser
-import time
 from urwid.widget import (BOX, FLOW, FIXED)
 import random
+from security import safe_requests
 
 SO_URL = "https://stackoverflow.com"
 
@@ -269,7 +269,7 @@ def souper(url):
     """Turns a given URL into a BeautifulSoup object."""
 
     try:
-        html = requests.get(url, headers={"User-Agent": random.choice(USER_AGENTS)})
+        html = safe_requests.get(url, headers={"User-Agent": random.choice(USER_AGENTS)})
     except requests.exceptions.RequestException:
         sys.stdout.write("\n%s%s%s" % (RED, "Rebound was unable to fetch Stack Overflow results. "
                                             "Please check that you are connected to the internet.\n", END))
