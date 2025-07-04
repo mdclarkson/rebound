@@ -269,7 +269,7 @@ def souper(url):
     """Turns a given URL into a BeautifulSoup object."""
 
     try:
-        html = requests.get(url, headers={"User-Agent": random.choice(USER_AGENTS)})
+        html = requests.get(url, headers={"User-Agent": random.choice(USER_AGENTS)}, timeout=60)
     except requests.exceptions.RequestException:
         sys.stdout.write("\n%s%s%s" % (RED, "Rebound was unable to fetch Stack Overflow results. "
                                             "Please check that you are connected to the internet.\n", END))
