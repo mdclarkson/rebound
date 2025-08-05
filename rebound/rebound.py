@@ -16,6 +16,7 @@ import webbrowser
 import time
 from urwid.widget import (BOX, FLOW, FIXED)
 import random
+from security import safe_command
 
 SO_URL = "https://stackoverflow.com"
 
@@ -160,8 +161,7 @@ def write(get):
 def execute(command):
     """Executes a given command and clones stdout/err to both variables and the
     terminal (in real-time)."""
-    process = Popen(
-        command,
+    process = safe_command.run(Popen, command,
         cwd=None,
         shell=False,
         close_fds=True,
